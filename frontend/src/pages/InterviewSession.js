@@ -21,7 +21,7 @@ export default function InterviewSession() {
     try {
       const data = await api.getInterview(id);
       setInterview(data);
-      // Restore draft for current question if already answered
+      
       const q = data.questions[activeIdx];
       if (q?.answerText) setDraft(q.answerText);
     } catch (e) {
@@ -31,9 +31,9 @@ export default function InterviewSession() {
     }
   }, [id, activeIdx]);
 
-  useEffect(() => { loadInterview(); }, [id]);  // Only reload on mount
+  useEffect(() => { loadInterview(); }, [id]);  
 
-  // When navigating between questions, update draft to whatever is saved
+  
   const goTo = (idx) => {
     setActiveIdx(idx);
     setSaved(false);

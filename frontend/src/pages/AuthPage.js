@@ -35,7 +35,6 @@ export default function AuthPage() {
 
   return (
     <div className="auth-page">
-      {/* Left illustration panel */}
       <div className="auth-left">
         <div className="auth-illustration">
           <h1>

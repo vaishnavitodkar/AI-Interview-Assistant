@@ -24,10 +24,7 @@ public class InterviewController {
     private final InterviewService interviewService;
     private final CurrentUserProvider currentUserProvider;
 
-    /**
-     * Creates a new mock interview. The AI service generates questions for
-     * the requested role/difficulty and they are stored immediately.
-     */
+    
     @PostMapping
     public ResponseEntity<InterviewResponse> createInterview(
             @Valid @RequestBody CreateInterviewRequest request,
@@ -38,19 +35,14 @@ public class InterviewController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    /**
-     * Returns the current user's interview history (summary view).
-     */
+   
     @GetMapping
     public ResponseEntity<List<InterviewSummary>> getHistory(Authentication authentication) {
         User user = currentUserProvider.getCurrentUser(authentication);
         return ResponseEntity.ok(interviewService.getInterviewHistory(user));
     }
 
-    /**
-     * Returns full detail for a single interview, including questions and
-     * any answers submitted so far.
-     */
+    
     @GetMapping("/{id}")
     public ResponseEntity<InterviewResponse> getInterview(
             @PathVariable Long id,
@@ -60,9 +52,7 @@ public class InterviewController {
         return ResponseEntity.ok(interviewService.getInterviewById(user, id));
     }
 
-    /**
-     * Submits (or updates) the candidate's answer to a specific question.
-     */
+    
     @PostMapping("/{id}/questions/{questionId}/answer")
     public ResponseEntity<InterviewResponse> submitAnswer(
             @PathVariable Long id,

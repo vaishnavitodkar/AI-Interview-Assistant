@@ -26,11 +26,6 @@ public class InterviewService {
     private final AnswerRepository answerRepository;
     private final AiService aiService;
 
-    /**
-     * Creates a new interview: calls the AI service to generate questions for
-     * the requested role/difficulty, then persists the interview and its
-     * generated questions.
-     */
     @Transactional
     public InterviewResponse createInterview(User user, CreateInterviewRequest request) {
         List<String> generatedQuestions = aiService.generateQuestions(
@@ -70,10 +65,7 @@ public class InterviewService {
         return toInterviewResponse(interview);
     }
 
-    /**
-     * Saves (or updates) the candidate's answer to a specific question and
-     * marks the interview as IN_PROGRESS.
-     */
+   
     @Transactional
     public InterviewResponse submitAnswer(User user, Long interviewId, Long questionId, AnswerSubmitRequest request) {
         Interview interview = findOwnedInterview(user, interviewId);
@@ -95,15 +87,11 @@ public class InterviewService {
             interviewRepository.save(interview);
         }
 
-        // Refresh to include the newly saved answer
         Interview refreshed = findOwnedInterview(user, interviewId);
         return toInterviewResponse(refreshed);
     }
 
-    /**
-     * Fetches an interview and verifies it belongs to the requesting user,
-     * preventing one user from accessing another's interview data.
-     */
+   
     Interview findOwnedInterview(User user, Long interviewId) {
         return interviewRepository.findByIdAndUser(interviewId, user)
                 .orElseThrow(() -> new ResourceNotFoundException(
