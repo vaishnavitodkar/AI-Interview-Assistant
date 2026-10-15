@@ -11,7 +11,7 @@ receive an AI-generated scorecard with an overall score and per-question feedbac
 - **Spring Security + JWT** (jjwt 0.11.5) — stateless authentication
 - **Spring Data JPA + Hibernate** — ORM and persistence
 - **PostgreSQL** — relational database
-- **Anthropic Claude API** — AI question generation and answer evaluation
+- **oogle Gemini API** — AI question generation and answer evaluation
 - **Maven**
 
 ## Architecture
@@ -29,7 +29,7 @@ Controllers  (AuthController / InterviewController / ScorecardController)
 Services     (AuthService / InterviewService / ScorecardService)
   │                │
   │                ▼
-  │          AiService (AnthropicAiService) ──► Claude API
+  │          AiService  ──► Claude API
   │
   ▼
 Repositories (Spring Data JPA) ──► PostgreSQL
@@ -47,7 +47,7 @@ User ──< Interview ──< Question ──── Answer
 - Java 17+
 - Maven 3.8+
 - PostgreSQL running locally
-- An Anthropic API key from https://console.anthropic.com/
+- A Gemini API key from https://aistudio.google.com/
 
 ### 2. Create the PostgreSQL database
 
@@ -68,7 +68,7 @@ GRANT ALL PRIVILEGES ON DATABASE ai_interview_db TO ai_interview_user;
 export DB_USERNAME=your_db_username
 export DB_PASSWORD=your_db_password
 export JWT_SECRET=your_jwt_secret
-export ANTHROPIC_API_KEY=your_anthropic_api_key
+export GIMINI_API_KEY=your_gemini_api_key
 ```
 
 ### 4. Run the application
@@ -196,4 +196,4 @@ curl -X POST http://localhost:8080/api/interviews/1/scorecard \
 | `DB_USERNAME`      | Postgres username                       | `ai_interview_user`            |
 | `DB_PASSWORD`      | Postgres password                       | `your_password_here`           |
 | `JWT_SECRET`       | Secret key for signing JWTs (min 32 chars) | output of `openssl rand -base64 32` |
-| `ANTHROPIC_API_KEY`| Anthropic API key                       | `sk-ant-...`                   |
+| `GEMINI_API_KEY`| Gemini API key                          | `sk-ant-...`                   |
