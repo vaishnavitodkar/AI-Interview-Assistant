@@ -11,7 +11,7 @@ receive an AI-generated scorecard with an overall score and per-question feedbac
 - **Spring Security + JWT** (jjwt 0.11.5) — stateless authentication
 - **Spring Data JPA + Hibernate** — ORM and persistence
 - **PostgreSQL** — relational database
-- **oogle Gemini API** — AI question generation and answer evaluation
+- **Google Gemini API** — AI question generation and answer evaluation
 - **Maven**
 
 ## Architecture
